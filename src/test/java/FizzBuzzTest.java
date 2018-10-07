@@ -15,4 +15,10 @@ public class FizzBuzzTest {
     {
         assertEquals("Fizz",fizzBuzzObject.fizzOrBuzz(3));
     }
+
+    @Test
+    public void returnBuzzFor5()
+    {
+        assertEquals("Buzz",fizzBuzzObject.fizzOrBuzz(5));
+    }
 }
