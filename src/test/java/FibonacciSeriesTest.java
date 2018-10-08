@@ -6,12 +6,13 @@ public class FibonacciSeriesTest {
     FibonacciSeries fibonacciSeries = new FibonacciSeries();
 
     @Test
-    public void ShouldReturnOneForOne() {
-        assertEquals(1, fibonacciSeries.nthNumber(1));
+    public void ShouldReturnZeroForOne() {
+        assertEquals(0, fibonacciSeries.nthNumber(1));
     }
 
     @Test
     public void shouldReturnOneForTwo() {
         assertEquals(1, fibonacciSeries.nthNumber(2));
     }
+
 }
