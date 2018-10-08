@@ -2,7 +2,6 @@ public class FibonacciSeries {
     private static final int ZERO = 0;
     private static final int ONE = 1;
     private static final int TWO = 2;
-    private static final int THREE = 3;
 
     public int nthNumber(int index) {
         if (index == ONE) {
