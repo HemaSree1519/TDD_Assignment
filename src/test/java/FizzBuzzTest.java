@@ -31,14 +31,12 @@ public class FizzBuzzTest {
     }
 
     @Test
-    public void returnsFizzBuzzFor3And5Multilples()
-    {
-        assertEquals("FizzBuzz",fizzBuzzObject.fizzOrBuzz(15));
+    public void returnsFizzBuzzFor3And5Multilples() {
+        assertEquals("FizzBuzz", fizzBuzzObject.fizzOrBuzz(15));
     }
 
     @Test
-    public void returnSameNumberIfNotFizzOrBuzzOrFizzBuzz()
-    {
-        assertEquals("7",fizzBuzzObject.fizzOrBuzz(7));
+    public void returnSameNumberIfNotFizzOrBuzzOrFizzBuzz() {
+        assertEquals("7", fizzBuzzObject.fizzOrBuzz(7));
     }
 }
