@@ -17,4 +17,10 @@ public class NumberTest {
     {
         assertTrue(number.isPrime(2));
     }
+
+    @Test
+    public void returnTrueForThree()
+    {
+        assertTrue(number.isPrime(3));
+    }
 }
