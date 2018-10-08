@@ -26,8 +26,7 @@ public class FibonacciSeriesTest {
     }
 
     @Test
-    public void shouldReturn4181For20()
-    {
-        assertEquals(4181,fibonacciSeries.nthNumber(20));
+    public void shouldReturn4181For20() {
+        assertEquals(4181, fibonacciSeries.nthNumber(20));
     }
 }
