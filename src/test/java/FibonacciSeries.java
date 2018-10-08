@@ -7,7 +7,7 @@ public class FibonacciSeries {
     public int nthNumber(int index) {
         if (index == ONE) {
             return ZERO;
-        } else if (index == TWO || index == THREE) {
+        } else if (index == TWO) {
             return ONE;
         } else {
             return nthNumber(index - 1) + nthNumber(index - 2);
