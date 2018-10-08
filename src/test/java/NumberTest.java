@@ -35,4 +35,10 @@ public class NumberTest {
     {
         assertTrue(number.isPrime(5));
     }
+
+    @Test
+    public void returnFalseForNine()
+    {
+        assertFalse(number.isPrime(9));
+    }
 }
