@@ -4,41 +4,35 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class NumberTest {
-    NumberDemo number= new NumberDemo();
+    NumberDemo number = new NumberDemo();
 
     @Test
-    public void returnFalseForOne()
-    {
+    public void returnFalseForOne() {
         assertFalse(number.isPrime(1));
     }
 
     @Test
-    public void returnTrueForTwo()
-    {
+    public void returnTrueForTwo() {
         assertTrue(number.isPrime(2));
     }
 
     @Test
-    public void returnTrueForThree()
-    {
+    public void returnTrueForThree() {
         assertTrue(number.isPrime(3));
     }
 
     @Test
-    public void returnFalseForFour()
-    {
+    public void returnFalseForFour() {
         assertFalse(number.isPrime(4));
     }
 
     @Test
-    public void returnTrueForFive()
-    {
+    public void returnTrueForFive() {
         assertTrue(number.isPrime(5));
     }
 
     @Test
-    public void returnFalseForNine()
-    {
+    public void returnFalseForNine() {
         assertFalse(number.isPrime(9));
     }
 }
