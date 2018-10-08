@@ -16,8 +16,14 @@ public class FibonacciSeriesTest {
     }
 
     @Test
-    public void shouldReturnOneForThree()
-    {
-        assertEquals(1,fibonacciSeries.nthNumber(3));
+    public void shouldReturnOneForThree() {
+        assertEquals(1, fibonacciSeries.nthNumber(3));
     }
+
+    @Test
+    public void shouldReturnTwoForFour() {
+        assertEquals(2, fibonacciSeries.nthNumber(4));
+    }
+
+
 }
