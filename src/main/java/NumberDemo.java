@@ -1,17 +1,21 @@
 public class NumberDemo {
 private static final int ONE =1;
 private static final int TWO=2;
-private static final int THREE=3;
+private static final int ZERO=0;
     public boolean isPrime(int inputNumber) {
-        if (inputNumber == ONE) {
+        if(inputNumber == ONE) {
             return false;
         }
         if(inputNumber == TWO) {
             return true;
         }
-        if(inputNumber == THREE) {
-            return true;
+        for(int index=TWO;index <= inputNumber / TWO; index++)
+        {
+            if(inputNumber % index == ZERO)
+            {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 }

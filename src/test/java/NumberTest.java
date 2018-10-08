@@ -29,4 +29,10 @@ public class NumberTest {
     {
         assertFalse(number.isPrime(4));
     }
+
+    @Test
+    public void returnTrueForFive()
+    {
+        assertTrue(number.isPrime(5));
+    }
 }
