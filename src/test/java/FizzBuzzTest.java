@@ -24,4 +24,9 @@ public class FizzBuzzTest {
     public void returnFizzFor3Multiples() {
         assertEquals("Fizz", fizzBuzzObject.fizzOrBuzz(6));
     }
+
+    @Test
+    public void returnBuzzFor5Multiples() {
+        assertEquals("Buzz", fizzBuzzObject.fizzOrBuzz(10));
+    }
 }
