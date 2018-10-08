@@ -8,7 +8,7 @@ public class FibonacciSeries {
         {
             return ZERO;
         }
-        else if (index == TWO)
+        else if (index == TWO || index == THREE)
         {
             return ONE;
         }
