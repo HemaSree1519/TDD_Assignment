@@ -10,4 +10,8 @@ public class FibonacciSeriesTest {
         assertEquals(1, fibonacciSeries.nthNumber(1));
     }
 
+    @Test
+    public void shouldReturnOneForTwo() {
+        assertEquals(1, fibonacciSeries.nthNumber(2));
+    }
 }
