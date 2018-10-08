@@ -23,4 +23,10 @@ public class NumberTest {
     {
         assertTrue(number.isPrime(3));
     }
+
+    @Test
+    public void returnFalseForFour()
+    {
+        assertFalse(number.isPrime(4));
+    }
 }
