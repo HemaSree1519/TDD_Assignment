@@ -1,3 +1,6 @@
+package Assignment2;
+
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -7,26 +10,26 @@ public class FibonacciSeriesTest {
 
     @Test
     public void ShouldReturnZeroForOne() {
-        assertEquals(0, fibonacciSeries.nthNumber(1));
+        Assert.assertEquals(0, fibonacciSeries.nthNumber(1));
     }
 
     @Test
     public void shouldReturnOneForTwo() {
-        assertEquals(1, fibonacciSeries.nthNumber(2));
+        Assert.assertEquals(1, fibonacciSeries.nthNumber(2));
     }
 
     @Test
     public void shouldReturnOneForThree() {
-        assertEquals(1, fibonacciSeries.nthNumber(3));
+        Assert.assertEquals(1, fibonacciSeries.nthNumber(3));
     }
 
     @Test
     public void shouldReturnTwoForFour() {
-        assertEquals(2, fibonacciSeries.nthNumber(4));
+        Assert.assertEquals(2, fibonacciSeries.nthNumber(4));
     }
 
     @Test
     public void shouldReturn4181For20() {
-        assertEquals(4181, fibonacciSeries.nthNumber(20));
+        Assert.assertEquals(4181, fibonacciSeries.nthNumber(20));
     }
 }

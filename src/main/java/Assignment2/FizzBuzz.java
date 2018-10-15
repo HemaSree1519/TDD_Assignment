@@ -1,3 +1,5 @@
+package Assignment2;
+
 public class FizzBuzz {
     private static final int THREE = 3;
     private static final int FIVE = 5;
@@ -5,7 +7,7 @@ public class FizzBuzz {
 
     public String fizzOrBuzz(int inputNumber) {
         if (inputNumber % THREE == ZERO && inputNumber % FIVE == ZERO) {
-            return "FizzBuzz";
+            return "Assignment2.FizzBuzz";
         } else if (inputNumber % FIVE == ZERO) {
             return "Buzz";
         } else if (inputNumber % THREE == ZERO) {

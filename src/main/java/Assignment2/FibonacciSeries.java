@@ -1,3 +1,5 @@
+package Assignment2;
+
 public class FibonacciSeries {
     private static final int ZERO = 0;
     private static final int ONE = 1;

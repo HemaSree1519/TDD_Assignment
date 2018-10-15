@@ -1,3 +1,6 @@
+package Assignment2;
+
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
@@ -8,31 +11,31 @@ public class NumberTest {
 
     @Test
     public void returnFalseForOne() {
-        assertFalse(number.isPrime(1));
+        TestCase.assertFalse(number.isPrime(1));
     }
 
     @Test
     public void returnTrueForTwo() {
-        assertTrue(number.isPrime(2));
+        TestCase.assertTrue(number.isPrime(2));
     }
 
     @Test
     public void returnTrueForThree() {
-        assertTrue(number.isPrime(3));
+        TestCase.assertTrue(number.isPrime(3));
     }
 
     @Test
     public void returnFalseForFour() {
-        assertFalse(number.isPrime(4));
+        TestCase.assertFalse(number.isPrime(4));
     }
 
     @Test
     public void returnTrueForFive() {
-        assertTrue(number.isPrime(5));
+        TestCase.assertTrue(number.isPrime(5));
     }
 
     @Test
     public void returnFalseForNine() {
-        assertFalse(number.isPrime(9));
+        TestCase.assertFalse(number.isPrime(9));
     }
 }

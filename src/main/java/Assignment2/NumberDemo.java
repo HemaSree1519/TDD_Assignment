@@ -1,3 +1,5 @@
+package Assignment2;
+
 public class NumberDemo {
     private static final int ONE = 1;
     private static final int TWO = 2;
