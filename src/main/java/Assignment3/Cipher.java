@@ -5,8 +5,8 @@ public class Cipher {
     private String plainText;
     private String cipherText;
 
-    public String encrypt(String inputText) {
-        this.plainText = inputText;
+    public String encrypt(String plainText) {
+        this.plainText = plainText;
         cipherText = "";
         int CurrentLetterCount = ZERO;
         char currentLetter = plainText.charAt(ZERO);
@@ -21,5 +21,9 @@ public class Cipher {
         }
         cipherText = cipherText + currentLetter + CurrentLetterCount;
         return cipherText;
+    }
+
+    public char decrypt(String cipherText) {
+        return 'X';
     }
 }

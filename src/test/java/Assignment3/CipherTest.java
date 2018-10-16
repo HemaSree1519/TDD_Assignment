@@ -21,4 +21,9 @@ public class CipherTest {
     public void returnCharCountOfString() {
         assertEquals("a2b3z1d2", cipher.encrypt("aabbbzdd"));
     }
+
+    @Test
+    public void returnXForX1() {
+        assertEquals('X', cipher.decrypt("X1"));
+    }
 }
