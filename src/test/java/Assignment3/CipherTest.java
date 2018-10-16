@@ -24,6 +24,11 @@ public class CipherTest {
 
     @Test
     public void returnXForX1() {
-        assertEquals('X', cipher.decrypt("X1"));
+        assertEquals("X", cipher.decrypt("X1"));
+    }
+
+    @Test
+    public void returnFullLetters() {
+        assertEquals("ffmmm", cipher.decrypt("f2m3"));
     }
 }
