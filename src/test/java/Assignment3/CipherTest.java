@@ -8,17 +8,17 @@ public class CipherTest {
     Cipher cipher = new Cipher();
 
     @Test
-    public void returnLetteraFora() {
-        assertEquals("a", cipher.encrypt("a"));
-    }
-
-    @Test
-    public void returnSameLetter() {
-        assertEquals("M", cipher.encrypt("M"));
+    public void returnLettera1Fora() {
+        assertEquals("a1", cipher.encrypt("a"));
     }
 
     @Test
     public void returnNumberOfLetters() {
-        assertEquals("3", cipher.encrypt("aaa"));
+        assertEquals("a3", cipher.encrypt("aaa"));
+    }
+
+    @Test
+    public void returnCharCountOfString() {
+        assertEquals("a2b3z1d2", cipher.encrypt("aabbbzdd"));
     }
 }
