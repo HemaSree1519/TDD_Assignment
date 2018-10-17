@@ -5,7 +5,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class CipherTest {
-    Cipher cipher = new Cipher();
+    private Cipher cipher = new Cipher();
+    private Cipher2 cipher2 = new Cipher2();
 
     @Test
     public void returnLettera1Fora() {
@@ -24,11 +25,11 @@ public class CipherTest {
 
     @Test
     public void returnXForX1() {
-        assertEquals("X", cipher.decrypt("X1"));
+        assertEquals("X", cipher2.decrypt("X1"));
     }
 
     @Test
-    public void returnFullLetters() {
-        assertEquals("ffmmm", cipher.decrypt("f2m3"));
+    public void returnDecodedMessage() {
+        assertEquals("ffmmm", cipher2.decrypt("f2m3"));
     }
 }
