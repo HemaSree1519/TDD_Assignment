@@ -3,6 +3,7 @@ package Assignment4;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SingletonWithEnumTest {
     SingletonWithEnum Obj1 = SingletonWithEnum.INSTANCE;
@@ -23,6 +24,10 @@ public class SingletonWithEnumTest {
         assertEquals(2, Obj1.getValue());
     }
 
+    @Test
+    public void shouldReturnTrueIfTwoObjectsReferSameInstance(){
+        assertTrue(Obj1.equals(Obj2));
+    }
 }
 
 
