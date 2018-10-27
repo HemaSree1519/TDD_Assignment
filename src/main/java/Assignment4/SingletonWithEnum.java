@@ -2,13 +2,14 @@ package Assignment4;
 
 public enum SingletonWithEnum {
     INSTANCE;
-    int value;
+    int data;
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setValue(int data) {
+        this.data = data;
     }
 
     public int getValue() {
-        return value;
+        return data;
     }
 }
+

@@ -25,7 +25,7 @@ public class SingletonWithEnumTest {
     }
 
     @Test
-    public void shouldReturnTrueIfTwoObjectsReferSameInstance(){
+    public void shouldReturnTrueIfTwoObjectsReferSameInstance() {
         assertTrue(Obj1.equals(Obj2));
     }
 }
