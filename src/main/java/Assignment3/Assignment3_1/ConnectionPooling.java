@@ -2,6 +2,7 @@ package Assignment3.Assignment3_1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,10 @@ public class ConnectionPooling implements ConnectionPool {
             pool.add(createConnection(url, user, password));
         }
         return new ConnectionPooling(url, user, password, pool);
+    }
+
+    public static ResultSet executeTheQuery(Connection connection, String query) throws SQLException {
+        return connection.createStatement().executeQuery(query);
     }
 
     @Override

@@ -4,8 +4,10 @@ import org.junit.Test;
 
 import java.sql.Connection;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ConnectionPoolingTest {
@@ -75,5 +77,18 @@ public class ConnectionPoolingTest {
             connectionPool.returnConnection(connection5);
         }
         assertTrue(connectionPool.getConnection().isValid(1));
+    }
+
+    @Test
+
+    public void executeQuery() throws SQLException {
+        ConnectionPool connectionPool = ConnectionPooling
+                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
+        Connection connection = connectionPool.getConnection();
+        ResultSet rs = ConnectionPooling.executeTheQuery(connection, "select name from dbtestschema.table where id=01");
+        rs.next();
+        String name = rs.getString("name");
+        String expectedName = "Hema" + "      ";
+        assertEquals(expectedName, name);
     }
 }
