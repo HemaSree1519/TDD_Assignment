@@ -17,4 +17,12 @@ public class ConnectionPoolingTest {
 
         assertTrue(connection.isValid(1));
     }
+
+    @Test
+    public void checkConnectionPoolCreation() throws SQLException {
+        ConnectionPool connectionPool = ConnectionPooling
+                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
+
+        assertTrue(connectionPool.getConnection().isValid(1));
+    }
 }
