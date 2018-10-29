@@ -74,7 +74,9 @@ public class ConnectionPooling implements ConnectionPool {
     public Connection getConnection() {
         Connection connection = connectionPool
                 .remove(connectionPool.size() - 1);
+        System.out.println("Connection Pool Size :"+ connectionPool.size());
         usedConnections.add(connection);
+        System.out.println("Used Pool Size :"+ usedConnections.size());
         return connection;
     }
 

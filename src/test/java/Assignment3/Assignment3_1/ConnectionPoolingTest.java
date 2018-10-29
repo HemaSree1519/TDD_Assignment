@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertTrue;
 
 public class ConnectionPoolingTest {
+
     @Test
     public void validateConnectionCreation() throws SQLException {
         Connection connection = (Connection) ConnectionPooling
@@ -23,6 +24,17 @@ public class ConnectionPoolingTest {
         ConnectionPool connectionPool = ConnectionPooling
                 .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
 
+        assertTrue(connectionPool.getConnection().isValid(1));
+    }
+    @Test
+    public void returnConnectionIfGetConnectionCountLessThanPoolSize() throws SQLException {
+        ConnectionPool connectionPool = ConnectionPooling
+                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
+
+        assertTrue(connectionPool.getConnection().isValid(1));
+        assertTrue(connectionPool.getConnection().isValid(1));
+        assertTrue(connectionPool.getConnection().isValid(1));
+        assertTrue(connectionPool.getConnection().isValid(1));
         assertTrue(connectionPool.getConnection().isValid(1));
     }
 }
