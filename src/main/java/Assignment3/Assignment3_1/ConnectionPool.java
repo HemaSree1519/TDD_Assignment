@@ -1,9 +1,10 @@
 package Assignment3.Assignment3_1;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public interface ConnectionPool {
-    Connection getConnection();
+    Connection getConnection() throws SQLException;
 
-    boolean removeConnection(Connection connection);
+    boolean returnConnection(Connection connection);
 }

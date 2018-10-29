@@ -10,6 +10,8 @@ import static org.junit.Assert.assertTrue;
 
 public class ConnectionPoolingTest {
 
+    private static int POOL_SIZE = 5;
+
     @Test
     public void validateConnectionCreation() throws SQLException {
         Connection connection = (Connection) ConnectionPooling
@@ -31,8 +33,31 @@ public class ConnectionPoolingTest {
     public void returnConnectionIfGetConnectionCountLessThanPoolSize() throws SQLException {
         ConnectionPool connectionPool = ConnectionPooling
                 .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
-        for (int count = 0; count < 5; count++) {
+        for (int count = 0; count < POOL_SIZE; count++) {
             assertTrue(connectionPool.getConnection().isValid(1));
         }
     }
+
+    @Test
+    public void throwExceptionIfGetConnectionCountExceeds() throws SQLException {
+        ConnectionPool connectionPool = ConnectionPooling
+                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
+
+        try {
+            for (int count = 0; count < POOL_SIZE + 1; count++) {
+                assertTrue(connectionPool.getConnection().isValid(1));
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+    }
+    @Test
+    public void validaReturnConnection() throws SQLException {
+        ConnectionPool connectionPool = ConnectionPooling
+                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
+        Connection connection = connectionPool.getConnection();
+
+        assertTrue(connectionPool.returnConnection(connection));
+
+    }
+
 }

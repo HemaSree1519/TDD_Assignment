@@ -24,8 +24,6 @@ public class ConnectionPooling implements ConnectionPool {
 
     public static Connection createConnection(String url, String user, String password) throws SQLException {
 
-        System.out.println("JDBC Connection Testing ------------");
-
         try {
 
             Class.forName("org.postgresql.Driver");
@@ -37,8 +35,6 @@ public class ConnectionPooling implements ConnectionPool {
             return null;
 
         }
-
-        System.out.println("PostgreSQL JDBC Driver Found");
 
         Connection connection = null;
 
@@ -54,7 +50,6 @@ public class ConnectionPooling implements ConnectionPool {
         }
 
         if (connection != null) {
-            System.out.println("Connection Established !");
             return connection;
         } else {
             System.out.println("Failed to make connection !");
@@ -71,17 +66,26 @@ public class ConnectionPooling implements ConnectionPool {
     }
 
     @Override
-    public Connection getConnection() {
-        Connection connection = connectionPool
-                .remove(connectionPool.size() - 1);
-        System.out.println("Connection Pool Size :"+ connectionPool.size());
+    public Connection getConnection() throws SQLException {
+        if (connectionPool.isEmpty()) {
+            if (usedConnections.size() < POOL_SIZE) {
+                connectionPool.add(createConnection(url, user, password));
+            } else {
+                try {
+                    throw new PoolSizeOverFlowException();
+                } catch (PoolSizeOverFlowException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+        Connection connection = connectionPool.remove(connectionPool.size() - 1);
         usedConnections.add(connection);
-        System.out.println("Used Pool Size :"+ usedConnections.size());
         return connection;
     }
 
     @Override
-    public boolean removeConnection(Connection connection) {
-        return false;
+    public boolean returnConnection(Connection connection) {
+        connectionPool.add(connection);
+        return usedConnections.remove(connection);
     }
 }
