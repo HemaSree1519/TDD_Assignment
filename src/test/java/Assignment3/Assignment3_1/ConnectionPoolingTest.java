@@ -50,8 +50,9 @@ public class ConnectionPoolingTest {
         } catch (ArrayIndexOutOfBoundsException e) {
         }
     }
+
     @Test
-    public void validaReturnConnection() throws SQLException {
+    public void validateReturnConnection() throws SQLException {
         ConnectionPool connectionPool = ConnectionPooling
                 .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
         Connection connection = connectionPool.getConnection();
@@ -60,4 +61,19 @@ public class ConnectionPoolingTest {
 
     }
 
+    @Test
+    public void GetConnectionAfterLimitReachedIfReturnedConnection() throws SQLException {
+        ConnectionPool connectionPool = ConnectionPooling
+                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
+        for (int count = 0; count < POOL_SIZE - 1; count++) {
+            assertTrue(connectionPool.getConnection().isValid(1));
+        }
+        Connection connection5 = connectionPool.getConnection();
+        try {
+            Connection connection6 = connectionPool.getConnection();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            connectionPool.returnConnection(connection5);
+        }
+        assertTrue(connectionPool.getConnection().isValid(1));
+    }
 }
