@@ -1,4 +1,4 @@
-package Assignment4;
+package Assignment3.Assignment3_2;
 
 public enum SingletonWithEnum {
     INSTANCE;

@@ -1,5 +1,6 @@
-package Assignment4;
+package Assignment3.Assignment3_2;
 
+import Assignment3.Assignment3_2.SingletonWithEnum;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
