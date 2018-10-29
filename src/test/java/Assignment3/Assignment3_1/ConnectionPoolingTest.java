@@ -26,15 +26,13 @@ public class ConnectionPoolingTest {
 
         assertTrue(connectionPool.getConnection().isValid(1));
     }
+
     @Test
     public void returnConnectionIfGetConnectionCountLessThanPoolSize() throws SQLException {
         ConnectionPool connectionPool = ConnectionPooling
                 .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
-
-        assertTrue(connectionPool.getConnection().isValid(1));
-        assertTrue(connectionPool.getConnection().isValid(1));
-        assertTrue(connectionPool.getConnection().isValid(1));
-        assertTrue(connectionPool.getConnection().isValid(1));
-        assertTrue(connectionPool.getConnection().isValid(1));
+        for (int count = 0; count < 5; count++) {
+            assertTrue(connectionPool.getConnection().isValid(1));
+        }
     }
 }
