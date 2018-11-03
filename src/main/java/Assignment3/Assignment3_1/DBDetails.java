@@ -1,4 +1,13 @@
 package Assignment3.Assignment3_1;
 
-public class DBDetails {
+interface DBDetails {
+    String getDBDriverName();
+
+    String getDBUrl();
+
+    String getDBUser();
+
+    String getDBUserPswd();
+
+    int getConnectionPoolSize();
 }
