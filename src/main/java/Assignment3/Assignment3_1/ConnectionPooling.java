@@ -25,6 +25,10 @@ public class ConnectionPooling {
         return connectionPooling;
     }
 
+    static ResultSet executeTheQuery(Connection connection, String query) throws SQLException {
+        return connection.createStatement().executeQuery(query);
+    }
+
     Connection createConnection() {
 
         try {
@@ -40,10 +44,9 @@ public class ConnectionPooling {
         }
 
         Connection connection = null;
-
         try {
 
-            connection = DriverManager.getConnection(dbConfiguration.getDBUrl(), dbConfiguration.getDBUser(),dbConfiguration.getDBUserPswd());
+            connection = DriverManager.getConnection(dbConfiguration.getDBUrl(), dbConfiguration.getDBUser(), dbConfiguration.getDBUserPswd());
 
         } catch (SQLException e) {
 
@@ -58,10 +61,6 @@ public class ConnectionPooling {
             System.out.println("Failed to make connection !");
             return null;
         }
-    }
-
-    public static ResultSet executeTheQuery(Connection connection, String query) throws SQLException {
-        return connection.createStatement().executeQuery(query);
     }
 
     void createPool() {
@@ -92,10 +91,12 @@ public class ConnectionPooling {
         return usedConnections.remove(connection);
 
     }
-    int getConnectionPoolsize(){
+
+    int getConnectionPoolsize() {
         return connectionPool.size();
     }
-    int getUsedConnections(){
+
+    int getUsedConnections() {
         return usedConnections.size();
     }
 }

@@ -3,7 +3,6 @@ package Assignment3.Assignment3_1;
 import org.junit.Test;
 
 import java.sql.Connection;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -12,42 +11,39 @@ import static org.junit.Assert.assertTrue;
 
 public class ConnectionPoolingTest {
 
-    private static int POOL_SIZE = 5;
+    DBConfiguration dbConfiguration = new DBConfiguration();
+    ConnectionPooling connectionPoolingInstance = ConnectionPooling.getInstance(dbConfiguration);
 
     @Test
     public void validateConnectionCreation() throws SQLException {
-        Connection connection = (Connection) ConnectionPooling
-                .createConnection("jdbc:postgresql://localhost:5432/postgres", "postgres",
-                        "password");
+
+        Connection connection = (Connection) connectionPoolingInstance.createConnection();
 
         assertTrue(connection.isValid(1));
     }
 
     @Test
     public void checkConnectionPoolCreation() throws SQLException {
-        ConnectionPool connectionPool = ConnectionPooling
-                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
-
-        assertTrue(connectionPool.getConnection().isValid(1));
+        //ConnectionPoolingInstance.createPool();
+        connectionPoolingInstance.createPool();
+        assertTrue(connectionPoolingInstance.getConnection().isValid(1));
     }
 
     @Test
     public void returnConnectionIfGetConnectionCountLessThanPoolSize() throws SQLException {
-        ConnectionPool connectionPool = ConnectionPooling
-                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
-        for (int count = 0; count < POOL_SIZE; count++) {
-            assertTrue(connectionPool.getConnection().isValid(1));
+        connectionPoolingInstance.createPool();
+        for (int count = 0; count < dbConfiguration.getConnectionPoolSize(); count++) {
+            assertTrue(connectionPoolingInstance.getConnection().isValid(1));
         }
     }
 
     @Test
     public void throwExceptionIfGetConnectionCountExceeds() throws SQLException {
-        ConnectionPool connectionPool = ConnectionPooling
-                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
-
+        connectionPoolingInstance.createPool();
         try {
-            for (int count = 0; count < POOL_SIZE + 1; count++) {
-                assertTrue(connectionPool.getConnection().isValid(1));
+            for (int count = 0; count < dbConfiguration.getConnectionPoolSize() + 1; count++) {
+
+                assertTrue(connectionPoolingInstance.getConnection().isValid(1));
             }
         } catch (ArrayIndexOutOfBoundsException e) {
         }
@@ -55,36 +51,34 @@ public class ConnectionPoolingTest {
 
     @Test
     public void validateReturnConnection() throws SQLException {
-        ConnectionPool connectionPool = ConnectionPooling
-                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
-        Connection connection = connectionPool.getConnection();
-
-        assertTrue(connectionPool.returnConnection(connection));
+        connectionPoolingInstance.createPool();
+        Connection connection1 = connectionPoolingInstance.getConnection();
+        Connection connection2 = connectionPoolingInstance.getConnection();
+        connectionPoolingInstance.returnConnection(connection1);
+        assertEquals(1,connectionPoolingInstance.getUsedConnections());
 
     }
-
     @Test
     public void GetConnectionAfterLimitReachedIfReturnedConnection() throws SQLException {
-        ConnectionPool connectionPool = ConnectionPooling
-                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
-        for (int count = 0; count < POOL_SIZE - 1; count++) {
-            assertTrue(connectionPool.getConnection().isValid(1));
+        connectionPoolingInstance.createPool();
+
+        for (int count = 0; count < dbConfiguration.getConnectionPoolSize() - 1; count++) {
+            assertTrue(connectionPoolingInstance.getConnection().isValid(1));
         }
-        Connection connection5 = connectionPool.getConnection();
+        Connection connection5 = connectionPoolingInstance.getConnection();
         try {
-            Connection connection6 = connectionPool.getConnection();
+            Connection connection6 = connectionPoolingInstance.getConnection();
         } catch (ArrayIndexOutOfBoundsException e) {
-            connectionPool.returnConnection(connection5);
+            connectionPoolingInstance.returnConnection(connection5);
         }
-        assertTrue(connectionPool.getConnection().isValid(1));
+        assertTrue(connectionPoolingInstance.getConnection().isValid(1));
     }
 
     @Test
 
     public void executeQuery() throws SQLException {
-        ConnectionPool connectionPool = ConnectionPooling
-                .create("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
-        Connection connection = connectionPool.getConnection();
+        connectionPoolingInstance.createPool();
+        Connection connection = connectionPoolingInstance.getConnection();
         ResultSet rs = ConnectionPooling.executeTheQuery(connection, "select name from dbtestschema.table where id=01");
         rs.next();
         String name = rs.getString("name");
