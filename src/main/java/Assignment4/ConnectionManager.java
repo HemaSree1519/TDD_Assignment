@@ -6,10 +6,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class ConnectionManager {
     private static ConnectionManager connectionManager;
     private static DBConfiguration dbConfiguration;
     private final List<Connection> connectionPool;
+    private SelfishWorld selfishWorld = new SelfishWorld();
     private List<Connection> usedConnections = new ArrayList<>();
 
     ConnectionManager(DBConfiguration dbConfiguration) {
@@ -63,28 +66,32 @@ public class ConnectionManager {
         usedConnections.add(connection);
         return connection;
     }
-    void closeConnection(Connection connection){
+
+    void closeConnection(Connection connection) {
         try {
             usedConnections.remove(connection);
             connection.close();
-            System.out.println(Thread.currentThread().getName()+" returned and closed");
+            System.out.println(Thread.currentThread().getName() + " returned and closed");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     synchronized void produce() {
-        while (connectionPool.size() == dbConfiguration.getConnectionPoolSize()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+        while (true) {
+            while (connectionPool.size() == dbConfiguration.getConnectionPoolSize()) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            System.out.println(Thread.currentThread().getName() + " Produced new connection");
+            Connection connection = createConnection();
+            connectionPool.add(connection);
+            notifyAll();
         }
-        System.out.println(Thread.currentThread().getName() + " Produced new connection");
-        Connection connection = createConnection();
-        connectionPool.add(connection);
-        notifyAll();
     }
 
     synchronized Connection consume() {
@@ -95,9 +102,18 @@ public class ConnectionManager {
                 e.printStackTrace();
             }
         }
-        Connection connection= getConnection();
-        System.out.println(Thread.currentThread().getName()+" Consumed");
+        Connection connection = getConnection();
+        System.out.println(Thread.currentThread().getName() + " Consumed");
         notifyAll();
+        if(selfishWorld.isSelfish(Thread.currentThread().getName()))
+        {
+            try {
+                System.out.println(Thread.currentThread().getName()+" is Sleeping");
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         return connection;
     }
 }
